@@ -20,11 +20,10 @@
                HelperText="@ComputedHelperText"
                AutoClose="true">
     <PickerActions Context="picker">
-        <MudToolBar Dense="true" Class="px-1">
+        <div class="d-flex justify-space-between align-center pa-2" style="width:100%;">
             <MudButton Variant="Variant.Text" OnClick="@(() => picker.Clear())">清除</MudButton>
-            <MudSpacer />
-            <MudButton Variant="Variant.Text" OnClick="@(async () => await SelectThisWeekAsync(picker))">本周</MudButton>
-        </MudToolBar>
+            <MudButton Variant="Variant.Text" OnClick="@SelectThisWeekAsync">本周</MudButton>
+        </div>
     </PickerActions>
 </MudDatePicker>
 
@@ -94,7 +93,7 @@
         await WeekMondayChanged.InvokeAsync(_date);
     }
 
-    private async Task SelectThisWeekAsync(MudPicker<DateTime?> picker)
+    private async Task SelectThisWeekAsync()
     {
         _date = NormalizeToIsoWeekMonday(DateTime.Today);
         await WeekMondayChanged.InvokeAsync(_date);
@@ -103,7 +102,7 @@
             await _pickerRef.GoToDate(_date.Value, submitDate: false);
         }
 
-        picker.Close(false);
+        _pickerRef?.Close(false);
     }
 
     private static DateTime? NormalizeToIsoWeekMonday(DateTime? value)
