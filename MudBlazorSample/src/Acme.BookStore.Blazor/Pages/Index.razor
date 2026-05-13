@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using Volo.Abp.AspNetCore.Components.Messages
 @using Volo.Abp.AspNetCore.Components.Notifications
+@using MudBlazor
 @inherits BookStoreComponentBase
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IUiNotificationService NotificationService
@@ -19,5 +20,17 @@
         <Button onclick="@(() => { throw new Exception(); })">
             Show Error!
         </Button>
+        <hr />
+        <MudPaper Class="pa-4 mt-4" Elevation="2">
+            <MudText Typo="Typo.subtitle1" Class="mb-2">Week picker (by ISO week)</MudText>
+            <MudWeekPicker @bind-WeekMonday="PlanningWeekMonday"
+                           Class="search-field"
+                           Color="Color.Success"
+                           Label="Planning WK"
+                           Variant="Variant.Outlined" />
+            <MudText Typo="Typo.caption" Class="mt-2 d-block">
+                Bound value (Monday): @(PlanningWeekMonday?.ToString("yyyy-MM-dd") ?? "—")
+            </MudText>
+        </MudPaper>
     </div>
 </div>
