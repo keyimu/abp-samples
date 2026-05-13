@@ -23,7 +23,7 @@
         <MudToolBar Dense="true" Class="px-1">
             <MudButton Variant="Variant.Text" OnClick="@(() => picker.Clear())">清除</MudButton>
             <MudSpacer />
-            <MudButton Variant="Variant.Text" OnClick="@(() => SelectThisWeekAsync(picker))">本周</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="@(async () => await SelectThisWeekAsync(picker))">本周</MudButton>
         </MudToolBar>
     </PickerActions>
 </MudDatePicker>
